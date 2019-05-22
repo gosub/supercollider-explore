@@ -1,0 +1,39 @@
+# original parameter values of the space drone ensemble
+
+number of voices 96
+
+#name min,max,default
+
+offset 0,32,16
+fundamental 0,120,60
+pan -120,0,-60
+rnd -120,0,-60
+
+density -96,24,-36
+rnd 0,60,30
+dynamic 0,1,0.5
+
+attack -20,100,40
+decay -20,100,40
+
+pitch -12,12,0
+speed 0,10,5
+amt 0,2,1
+res 0,0.99,0.49
+
+damp -2,2,0
+gain 0,1,0.5
+
+
+# explanation of the signal path
+
+These are main components of each voice:
+- white noise generator
+- 2-pole bandpass filter
+- "gaiger" event generator
+- ADR envelope generator
+
+in addition there are two modulation sections:
+- one for the filter frequency
+- one for the stereo panning
+
