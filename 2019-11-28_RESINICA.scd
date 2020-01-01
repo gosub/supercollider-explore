@@ -1,6 +1,7 @@
 // patch name: RESINICA
 // patch date: 2019-11-28
 // patch desc: tuned comb filters array v2 (cf. Ableton Live Resonators)
+// patch prev: ACORESIA
 
 (
 {
