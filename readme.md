@@ -38,5 +38,5 @@ st-st-stutter effect, with variable time // prev:REBEVALLA
 ### DANACA - 2020-01-06 
 st-st-stutter effect, inspired by tkog feral glitch // prev:DOPACOS
 
-## ISOTIPA - 2020-07-06
+### ISOTIPA - 2020-07-06
 aliasing square-wave fm noise machine
