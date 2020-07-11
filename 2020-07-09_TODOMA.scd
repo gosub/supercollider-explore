@@ -26,22 +26,25 @@ B0 10 00 // touch off
 
 */
 
-
 (
 ~np_chan = 0;
-~np_cc_x = 11;
-~np_cc_y = 12;
-~nanopadX = Bus.control();
-~nanopadY = Bus.control();
+~np_cc_xy_gate = 16;
+~np_cc_x = 01;
+~np_cc_y = 02;
 
 MIDIClient.init;
 MIDIIn.connectAll;
-
-MIDIdef.cc(\nanoX, {|val, cc, chan, src| ~nanopadX.set(val/127)}, ~np_cc_x, ~np_chan);
-MIDIdef.cc(\nanoY, {|val, cc, chan, src| ~nanopadY.set(val/127)}, ~np_cc_y, ~np_chan);
 )
 
 (
-// NOT WORKING
-~nanopadX.linlin(0,1,1,100).poll
+MIDIdef.cc(\nanoTouchGate,
+    func: {|val, cc, chan, src|
+        (val/127).postln;
+    },
+    ccNum:~np_cc_xy_gate,
+    chan:~np_chan);
+)
+
+(
+MIDIdef.freeAll;
 )
