@@ -3,9 +3,6 @@
 // patch desc: an experiment in decoupling MIDIdef and SynthDef
 
 
-// possible solution: https://scsynth.org/t/buses-and-functions-questions/1902/5
-
-
 /*
 
 KORG NANOPAD2 MIDI DATA
@@ -27,6 +24,7 @@ B0 10 00 // touch off
 */
 
 (
+// make a dictionary: cc -> variable name
 ~np_chan = 0;
 ~np_cc_xy_gate = 16;
 ~np_cc_x = 01;
@@ -37,14 +35,26 @@ MIDIIn.connectAll;
 )
 
 (
+// define a function: (cc, varname) -> set a mididef on that cc with
+//                                     a fun that changes the global variable
+//                                     to the cc value
+~npXyGateCB = {|val| "Nanopad XY Gate Callback".postln};
+
 MIDIdef.cc(\nanoTouchGate,
     func: {|val, cc, chan, src|
-        (val/127).postln;
+        ~npXyGateCB.value(val/127);
     },
     ccNum:~np_cc_xy_gate,
     chan:~np_chan);
 )
 
 (
+~synth = Synth(\default);
+
+~npXyGateCB = {|val| ~synth.set(\amp, val)};
+)
+
+(
 MIDIdef.freeAll;
+~synth.release;
 )
