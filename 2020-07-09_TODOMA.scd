@@ -35,23 +35,24 @@ MIDIIn.connectAll;
 )
 
 (
-// define a function: (cc, varname) -> set a mididef on that cc with
-//                                     a fun that changes the global variable
-//                                     to the cc value
-~npXyGateCB = {|val| "Nanopad XY Gate Callback".postln};
+~map_normalized_cc_to_callback = {|cc_num, midi_chan, symbol|
+    MIDIdef.cc(symbol,
+        func: {|val, cc, chan, src|
+            symbol.envirGet.(val/127);
+        },
+        ccNum: cc_num,
+        chan: midi_chan);
+};
 
-MIDIdef.cc(\nanoTouchGate,
-    func: {|val, cc, chan, src|
-        ~npXyGateCB.value(val/127);
-    },
-    ccNum:~np_cc_xy_gate,
-    chan:~np_chan);
+~map_normalized_cc_to_callback.(~np_cc_xy_gate, ~np_chan, \xyGateCB);
+
+~xyGateCB = {|val| "Nanopad XY Gate Callback".postln};
 )
 
 (
 ~synth = Synth(\default);
 
-~npXyGateCB = {|val| ~synth.set(\amp, val)};
+~xyGateCB = {|val| ~synth.set(\amp, val)};
 )
 
 (
