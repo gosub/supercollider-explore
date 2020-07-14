@@ -35,6 +35,13 @@ MIDIClient.init;
 MIDIIn.connectAll;
 )
 
+// TODO: factory defaults dictionary for notes/buttons
+
+// TODO: inside the mididef function set the global var \symbol
+// and call the global callback \on_symbol
+
+// TODO: write the ~map_normalized_note_to_callback
+
 (
 ~map_normalized_cc_to_callback = {|cc_num, midi_chan, symbol|
     MIDIdef.cc(symbol,
