@@ -24,11 +24,12 @@ B0 10 00 // touch off
 */
 
 (
-// make a dictionary: cc -> variable name
-~np_chan = 0;
-~np_cc_xy_gate = 16;
-~np_cc_x = 01;
-~np_cc_y = 02;
+// factory defaults
+~nanopad_chan = 0;
+~nanopad_cc = Dictionary[
+    \xy_gate -> 16,
+    \x_axis -> 1,
+    \y_axis -> 2];
 
 MIDIClient.init;
 MIDIIn.connectAll;
@@ -44,15 +45,16 @@ MIDIIn.connectAll;
         chan: midi_chan);
 };
 
-~map_normalized_cc_to_callback.(~np_cc_xy_gate, ~np_chan, \xyGateCB);
-
-~xyGateCB = {|val| "Nanopad XY Gate Callback".postln};
+~nanopad_cc.keysValuesDo { |symbol, cc_num|
+    cc_num.postln;
+    symbol.postln;
+    ~map_normalized_cc_to_callback.(cc_num, ~nanopad_chan, symbol);
+};
 )
 
 (
-~synth = Synth(\default);
-
-~xyGateCB = {|val| ~synth.set(\amp, val)};
+~synth = Synth(\default, [\amp, 0]);
+~xy_gate = {|val| ~synth.set(\amp, val)};
 )
 
 (
