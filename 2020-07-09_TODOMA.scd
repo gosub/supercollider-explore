@@ -37,34 +37,41 @@ MIDIIn.connectAll;
 
 // TODO: factory defaults dictionary for notes/buttons
 
-// TODO: inside the mididef function set the global var \symbol
-// and call the global callback \on_symbol
-
 // TODO: write the ~map_normalized_note_to_callback
 
 (
 ~map_normalized_cc_to_callback = {|cc_num, midi_chan, symbol|
     MIDIdef.cc(symbol,
         func: {|val, cc, chan, src|
-            symbol.envirGet.(val/127);
+            symbol.envirPut(val/127);
+            ("on_" ++ symbol).asSymbol.envirGet.(val/127);
         },
         ccNum: cc_num,
         chan: midi_chan);
 };
 
 ~nanopad_cc.keysValuesDo { |symbol, cc_num|
-    cc_num.postln;
-    symbol.postln;
     ~map_normalized_cc_to_callback.(cc_num, ~nanopad_chan, symbol);
 };
 )
 
 (
 ~synth = Synth(\default, [\amp, 0]);
-~xy_gate = {|val| ~synth.set(\amp, val)};
+~on_xy_gate = {|val| ~synth.set(\amp, val)};
 )
 
 (
-MIDIdef.freeAll;
 ~synth.release;
+~on_xy_gate = nil;
 )
+
+(
+~pattern = Pbind(
+    \note, Pseq([0,7,4,11],inf),
+    \dur, Pfunc({~xy_gate}) * 0.3 + 0.3
+).play;
+)
+
+~pattern.stop;
+
+MIDIdef.freeAll;
