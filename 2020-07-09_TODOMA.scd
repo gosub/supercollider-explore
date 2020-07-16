@@ -31,6 +31,8 @@ B0 10 00 // touch off
     \x_axis -> 1,
     \y_axis -> 2];
 
+~nanopad_note_butt1 = 36;
+
 MIDIClient.init;
 MIDIIn.connectAll;
 )
@@ -38,6 +40,8 @@ MIDIIn.connectAll;
 // TODO: factory defaults dictionary for notes/buttons
 
 // TODO: write the ~map_normalized_note_to_callback
+MIDIdef.noteOn(\butt1on, {|vel, note, chan, src| vel.postln}, ~nanopad_note_butt1, ~nanopad_chan);
+MIDIdef.noteOff(\butt1off, {|vel, note, chan, src| vel.postln}, ~nanopad_note_butt1, ~nanopad_chan);
 
 (
 ~map_normalized_cc_to_callback = {|cc_num, midi_chan, symbol|
