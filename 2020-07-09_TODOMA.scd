@@ -38,7 +38,8 @@ MIDIIn.connectAll;
 )
 
 // TODO: factory defaults dictionary for notes/buttons
-
+// TODO: change order of parameters in ~map_normalized_ functions: symbol, cc_num, midi_chan
+// TODO: provide default value (nil) for midi_chan param in ~map_normalized_ funcs
 // TODO: write the ~map_normalized_note_to_callback
 MIDIdef.noteOn(\butt1on, {|vel, note, chan, src| vel.postln}, ~nanopad_note_butt1, ~nanopad_chan);
 MIDIdef.noteOff(\butt1off, {|vel, note, chan, src| vel.postln}, ~nanopad_note_butt1, ~nanopad_chan);
@@ -54,6 +55,20 @@ MIDIdef.noteOff(\butt1off, {|vel, note, chan, src| vel.postln}, ~nanopad_note_bu
         chan: midi_chan);
 };
 
+~map_normalized_note_to_callback = {|note_num, midi_chan, symbol|
+    MIDIdef.noteOn(symbol,
+        func: {|velocity, note, chan, src|
+            symbol.envirPut(velocity/127);
+            ("on_" ++ symbol).asSymbol.envirGet.(velocity/127);
+        },
+        noteNum: note_num,
+        chan: midi_chan);
+    //TODO: .noteOff
+};
+)
+
+
+(
 ~nanopad_cc.keysValuesDo { |symbol, cc_num|
     ~map_normalized_cc_to_callback.(cc_num, ~nanopad_chan, symbol);
 };
