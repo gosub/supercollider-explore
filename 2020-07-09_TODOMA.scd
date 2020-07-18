@@ -19,7 +19,7 @@ B0 10 00 // touch off
 80 24 40  // button 1 off
 
 90 25 60  // button 2 on
-80 25 40  // button 2 on
+80 25 40  // button 2 off
 
 */
 
@@ -38,11 +38,9 @@ MIDIIn.connectAll;
 )
 
 // TODO: factory defaults dictionary for notes/buttons
+// TODO; keysValuesDo over notes dictionary
 // TODO: change order of parameters in ~map_normalized_ functions: symbol, cc_num, midi_chan
 // TODO: provide default value (nil) for midi_chan param in ~map_normalized_ funcs
-// TODO: write the ~map_normalized_note_to_callback
-MIDIdef.noteOn(\butt1on, {|vel, note, chan, src| vel.postln}, ~nanopad_note_butt1, ~nanopad_chan);
-MIDIdef.noteOff(\butt1off, {|vel, note, chan, src| vel.postln}, ~nanopad_note_butt1, ~nanopad_chan);
 
 (
 ~map_normalized_cc_to_callback = {|cc_num, midi_chan, symbol|
@@ -63,10 +61,27 @@ MIDIdef.noteOff(\butt1off, {|vel, note, chan, src| vel.postln}, ~nanopad_note_bu
         },
         noteNum: note_num,
         chan: midi_chan);
-    //TODO: .noteOff
+    MIDIdef.noteOff((symbol++"off").asSymbol,
+        func: {|velocity, note, chan, src|
+            symbol.envirPut(0);
+            ("on_" ++ symbol).asSymbol.envirGet.(0);
+        },
+        noteNum: note_num,
+        chan: midi_chan);
 };
 )
 
+(
+~map_normalized_note_to_callback.(~nanopad_note_butt1, ~nanopad_chan, \button1);
+
+~on_button1 = {|val|
+    val.asBoolean.if(
+        {{var a = Synth(\default,[\amp, val, \freq, 500*val+500]);
+            0.1.sleep;
+            a.release
+    }.fork})
+};
+)
 
 (
 ~nanopad_cc.keysValuesDo { |symbol, cc_num|
