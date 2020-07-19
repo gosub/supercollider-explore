@@ -31,16 +31,17 @@ B0 10 00 // touch off
     \x_axis -> 1,
     \y_axis -> 2];
 
-~nanopad_note_butt1 = 36;
+~nanopad_first_button = 36;
+~nanopad_scenes = 4;
+~nanopad_buttons_per_scene = 16;
 
 MIDIClient.init;
 MIDIIn.connectAll;
 )
 
-// TODO: factory defaults dictionary for notes/buttons
-// TODO; keysValuesDo over notes dictionary
 // TODO: change order of parameters in ~map_normalized_ functions: symbol, cc_num, midi_chan
 // TODO: provide default value (nil) for midi_chan param in ~map_normalized_ funcs
+// TODO: separate nanopad specifics into a new file
 
 (
 ~map_normalized_cc_to_callback = {|cc_num, midi_chan, symbol|
@@ -72,14 +73,23 @@ MIDIIn.connectAll;
 )
 
 (
-~map_normalized_note_to_callback.(~nanopad_note_butt1, ~nanopad_chan, \button1);
+~nanopad_scenes.do {|scene|
+    ~nanopad_buttons_per_scene.do {|button|
+        var symbol, note;
+        if(scene==0,
+            {symbol = format("butt%",button + 1).asSymbol},
+            {symbol = format("butt%sc%",button + 1,scene).asSymbol});
+        note = (scene * ~nanopad_buttons_per_scene) + button + ~nanopad_first_button;
+        ~map_normalized_note_to_callback.(note, ~nanopad_chan, symbol);
+    };
+};
 
-~on_button1 = {|val|
-    val.asBoolean.if(
-        {{var a = Synth(\default,[\amp, val, \freq, 500*val+500]);
+~on_butt1 = {|val|
+    f = {var a = Synth(\default,[\amp, val, \freq, 500]);
             0.1.sleep;
             a.release
-    }.fork})
+    };
+    val.asBoolean.if({f.fork});
 };
 )
 
