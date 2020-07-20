@@ -39,12 +39,11 @@ MIDIClient.init;
 MIDIIn.connectAll;
 )
 
-// TODO: change order of parameters in ~map_normalized_ functions: symbol, cc_num, midi_chan
 // TODO: provide default value (nil) for midi_chan param in ~map_normalized_ funcs
 // TODO: separate nanopad specifics into a new file
 
 (
-~map_normalized_cc_to_callback = {|cc_num, midi_chan, symbol|
+~map_normalized_cc_to_callback = {|symbol, cc_num, midi_chan|
     MIDIdef.cc(symbol,
         func: {|val, cc, chan, src|
             symbol.envirPut(val/127);
@@ -54,7 +53,7 @@ MIDIIn.connectAll;
         chan: midi_chan);
 };
 
-~map_normalized_note_to_callback = {|note_num, midi_chan, symbol|
+~map_normalized_note_to_callback = {|symbol, note_num, midi_chan|
     MIDIdef.noteOn(symbol,
         func: {|velocity, note, chan, src|
             symbol.envirPut(velocity/127);
@@ -80,7 +79,7 @@ MIDIIn.connectAll;
             {symbol = format("butt%",button + 1).asSymbol},
             {symbol = format("butt%sc%",button + 1,scene).asSymbol});
         note = (scene * ~nanopad_buttons_per_scene) + button + ~nanopad_first_button;
-        ~map_normalized_note_to_callback.(note, ~nanopad_chan, symbol);
+        ~map_normalized_note_to_callback.(symbol, note, ~nanopad_chan);
     };
 };
 
@@ -95,7 +94,7 @@ MIDIIn.connectAll;
 
 (
 ~nanopad_cc.keysValuesDo { |symbol, cc_num|
-    ~map_normalized_cc_to_callback.(cc_num, ~nanopad_chan, symbol);
+    ~map_normalized_cc_to_callback.(symbol, cc_num, ~nanopad_chan);
 };
 )
 
