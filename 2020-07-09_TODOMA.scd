@@ -39,11 +39,10 @@ MIDIClient.init;
 MIDIIn.connectAll;
 )
 
-// TODO: provide default value (nil) for midi_chan param in ~map_normalized_ funcs
 // TODO: separate nanopad specifics into a new file
 
 (
-~map_normalized_cc_to_callback = {|symbol, cc_num, midi_chan|
+~map_normalized_cc_to_callback = {|symbol, cc_num, midi_chan=nil|
     MIDIdef.cc(symbol,
         func: {|val, cc, chan, src|
             symbol.envirPut(val/127);
@@ -53,7 +52,7 @@ MIDIIn.connectAll;
         chan: midi_chan);
 };
 
-~map_normalized_note_to_callback = {|symbol, note_num, midi_chan|
+~map_normalized_note_to_callback = {|symbol, note_num, midi_chan=nil|
     MIDIdef.noteOn(symbol,
         func: {|velocity, note, chan, src|
             symbol.envirPut(velocity/127);
