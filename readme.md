@@ -40,3 +40,6 @@ st-st-stutter effect, inspired by tkog feral glitch // prev:DOPACOS
 
 ### ISOTIPA - 2020-07-06
 aliasing square-wave fm noise machine
+
+### TODOMA - 2020-07-09
+an experiment in decoupling MIDIdef and SynthDef
