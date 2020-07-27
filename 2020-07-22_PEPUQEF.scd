@@ -48,23 +48,4 @@ MIDIIn.connectAll;
 };
 )
 
-(
-~synth = Synth(\default, [\amp, 0]);
-~on_xy_gate = {|val| ~synth.set(\amp, val)};
-)
-
-(
-~synth.release;
-~on_xy_gate = nil;
-)
-
-(
-~pattern = Pbind(
-    \note, Pseq([0,7,4,11],inf),
-    \dur, Pfunc({~xy_gate}) * 0.3 + 0.3
-).play;
-)
-
-~pattern.stop;
-
 MIDIdef.freeAll;
