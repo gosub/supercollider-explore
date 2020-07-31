@@ -16,6 +16,11 @@
 ~nanopad_scenes = 4;
 ~nanopad_buttons_per_scene = 16;
 
+// TODO: make Dictionary from buttons data
+// TODO: change scene mapping to using Dictionary
+)
+
+(
 MIDIClient.init;
 MIDIIn.connectAll;
 )
@@ -33,18 +38,18 @@ MIDIIn.connectAll;
     };
 };
 
+~nanopad_cc.keysValuesDo { |symbol, cc_num|
+    ~map_normalized_cc_to_callback.(symbol, cc_num, ~nanopad_chan);
+};
+)
+
+(
 ~on_butt1 = {|val|
     f = {var a = Synth(\default,[\amp, val, \freq, 500]);
             0.1.sleep;
             a.release
     };
     val.asBoolean.if({f.fork});
-};
-)
-
-(
-~nanopad_cc.keysValuesDo { |symbol, cc_num|
-    ~map_normalized_cc_to_callback.(symbol, cc_num, ~nanopad_chan);
 };
 )
 
