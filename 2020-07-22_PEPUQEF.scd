@@ -16,7 +16,18 @@
 ~nanopad_scenes = 4;
 ~nanopad_buttons_per_scene = 16;
 
-// TODO: make Dictionary from buttons data
+~nanopad_notes = Dictionary.new;
+~nanopad_scenes.do {|scene|
+    ~nanopad_buttons_per_scene.do {|button|
+        var symbol, note;
+        if(scene==0,
+            {symbol = format("butt%",button + 1).asSymbol},
+            {symbol = format("butt%sc%",button + 1,scene).asSymbol});
+        note = (scene * ~nanopad_buttons_per_scene) + button + ~nanopad_first_button;
+        ~nanopad_notes.put(symbol, note);
+    };
+};
+
 // TODO: change scene mapping to using Dictionary
 )
 
