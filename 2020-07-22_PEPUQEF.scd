@@ -28,7 +28,7 @@
     };
 };
 
-// TODO: change scene mapping to using Dictionary
+// TODO: encapsulate all in an environment
 )
 
 (
@@ -38,17 +38,9 @@ MIDIIn.connectAll;
 
 
 (
-~nanopad_scenes.do {|scene|
-    ~nanopad_buttons_per_scene.do {|button|
-        var symbol, note;
-        if(scene==0,
-            {symbol = format("butt%",button + 1).asSymbol},
-            {symbol = format("butt%sc%",button + 1,scene).asSymbol});
-        note = (scene * ~nanopad_buttons_per_scene) + button + ~nanopad_first_button;
-        ~map_normalized_note_to_callback.(symbol, note, ~nanopad_chan);
-    };
+~nanopad_notes.keysValuesDo {|symbol, note_num|
+    ~map_normalized_note_to_callback.(symbol, note_num, ~nanopad_chan);
 };
-
 ~nanopad_cc.keysValuesDo { |symbol, cc_num|
     ~map_normalized_cc_to_callback.(symbol, cc_num, ~nanopad_chan);
 };
