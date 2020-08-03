@@ -33,3 +33,19 @@
         chan: midi_chan);
 };
 )
+
+(
+MIDIClient.init;
+MIDIIn.connectAll;
+)
+
+// TODO: encapsulate all in an environment
+
+e = ();
+
+MIDIdef.cc(\xy, {|val, cc, chan, src| e.put(\xy,val/127); e[\on_xy].value(e, val/127)}, 16, nil);
+
+e.xy
+e.on_xy = {|self, x| x.postln}
+
+MIDIdef.freeAll;

@@ -27,8 +27,6 @@
         ~nanopad_notes.put(symbol, note);
     };
 };
-
-// TODO: encapsulate all in an environment
 )
 
 (
