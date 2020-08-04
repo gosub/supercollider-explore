@@ -40,6 +40,11 @@ MIDIIn.connectAll;
 )
 
 // TODO: encapsulate all in an environment
+~make_controller = {|cc_dict, note_dict|
+    var controller = ();
+    // TODO: map over cc
+    // TODO: map over notes
+};
 
 e = ();
 
