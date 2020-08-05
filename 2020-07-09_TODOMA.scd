@@ -40,9 +40,16 @@ MIDIIn.connectAll;
 )
 
 // TODO: encapsulate all in an environment
-~make_controller = {|cc_dict, note_dict|
+// TODO: test with a real controller
+~make_controller = {|cc_dict, note_dict, midi_chan=nil|
     var controller = ();
-    // TODO: map over cc
+    // install cc callbacks
+    cc_dict.keysValuesDo {|symbol, cc_num|
+        MIDIdef.cc(symbol, {|val, cc, chan, src|
+            controller.put(symbol, val/127);
+            controller[("on_" ++ symbol).asSymbol].value(controller, val/127);
+        }, ccNum: cc_numm, chan: midi_chan);
+    };
     // TODO: map over notes
 };
 
