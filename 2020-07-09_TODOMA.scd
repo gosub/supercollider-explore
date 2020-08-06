@@ -39,8 +39,9 @@ MIDIClient.init;
 MIDIIn.connectAll;
 )
 
-// TODO: encapsulate all in an environment
+(
 // TODO: test with a real controller
+
 ~make_controller = {|cc_dict, note_dict, midi_chan=nil|
     var controller = ();
     // install cc callbacks
@@ -50,14 +51,20 @@ MIDIIn.connectAll;
             controller[("on_" ++ symbol).asSymbol].value(controller, val/127);
         }, ccNum: cc_numm, chan: midi_chan);
     };
-    // TODO: map over notes
+    // install note callbacks
+    notes_dict.keysValuesDo {|symbol, note_num|
+        // map NOTEON
+        MIDIdef.noteOn(symbol, {|velocity, note, chan, src|
+            controller.put(symbol, velocity/127);
+            controller[("on_" ++ symbol).asSymbol].value(controller, velocity/127);
+        },noteNum: note_num, chan: midi_chan);
+        // map NOTEOFF
+        MIDIdef.noteOff((symbol++"off").asSymbol, {|velocity, note, chan, src|
+            controller.put(symbol, 0);
+            controller[("on_" ++ symbol).asSymbol].value(controller, 0);
+        },noteNum: note_num, chan: midi_chan);
+    };
 };
-
-e = ();
-
-MIDIdef.cc(\xy, {|val, cc, chan, src| e.put(\xy,val/127); e[\on_xy].value(e, val/127)}, 16, nil);
-
-e.xy
-e.on_xy = {|self, x| x.postln}
+)
 
 MIDIdef.freeAll;
