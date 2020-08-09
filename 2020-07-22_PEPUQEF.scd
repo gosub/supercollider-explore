@@ -35,6 +35,7 @@ MIDIIn.connectAll;
 )
 
 
+// TODO: convert to ~make_controller
 (
 ~nanopad_notes.keysValuesDo {|symbol, note_num|
     ~map_normalized_note_to_callback.(symbol, note_num, ~nanopad_chan);

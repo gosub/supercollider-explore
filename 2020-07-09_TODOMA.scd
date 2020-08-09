@@ -2,17 +2,7 @@
 // patch date: 2020-07-09
 // patch desc: an experiment in decoupling MIDIdef and SynthDef
 
-
-// TODO: explanation on how to use
-
 (
-MIDIClient.init;
-MIDIIn.connectAll;
-)
-
-(
-// TODO: test with a real controller
-
 ~make_controller = {|cc_dict, note_dict, midi_chan=nil|
     var controller = ();
     // install cc callbacks
@@ -37,5 +27,3 @@ MIDIIn.connectAll;
     };
 };
 )
-
-MIDIdef.freeAll;
