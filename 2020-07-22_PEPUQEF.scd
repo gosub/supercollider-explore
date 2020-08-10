@@ -35,18 +35,12 @@ MIDIIn.connectAll;
 )
 
 
-// TODO: convert to ~make_controller
 (
-~nanopad_notes.keysValuesDo {|symbol, note_num|
-    ~map_normalized_note_to_callback.(symbol, note_num, ~nanopad_chan);
-};
-~nanopad_cc.keysValuesDo { |symbol, cc_num|
-    ~map_normalized_cc_to_callback.(symbol, cc_num, ~nanopad_chan);
-};
+~np = ~make_controller.(~nanopad_cc, ~nanopad_notes, ~nanopad_chan);
 )
 
 (
-~on_butt1 = {|val|
+~np.on_butt1 = {|val|
     f = {var a = Synth(\default,[\amp, val, \freq, 500]);
             0.1.sleep;
             a.release
