@@ -1,45 +1,7 @@
-# My SuperCollider explorations
+# Supercollider Explorations
 
-## Patches
+Hi! I'm [gosub](https://github.com/gosub) and this repository is a collection of my music-coding wanderings in the fascinating land of [Supercollider](https://supercollider.github.io), a platform for synthesis, composition, and music experimentation in general.
 
-### PORLADO - 2019-05-19 
-aliasing saw-wave feedback machine
+Here you'll find a folder for every year in which I've wrote something in SuperCollider, and inside each folder an .scd file of every test, sketch, patch, experiment.
 
-### LELICA - 2019-05-23 
-aliasing square-wave feedback machine v2 // prev:PORLADO
-
-### OLOVASE - 2019-11-25 
-distorted percussions in a sea of reverb
-
-### ACORESIA - 2019-11-27 
-tuned comb filters array (cf. Ableton Live Resonators)
-
-### RESINICA - 2019-11-28 
-tuned comb filters array v2 (cf. Ableton Live Resonators) // prev:ACORESIA
-
-### VICRIMA - 2019-12-01 
-sine percussions ring-modded with a pitch-shifted version of themself (twice)
-
-### MEDIGENE - 2019-12-05 
-hyper-distorted drones
-
-### NODODO - 2019-12-26 
-echoing thumps over a slow changing drone
-
-### TUDIUS - 2019-12-26 
-schizophrenic strings // prev:NODODO
-
-### REBEVALLA - 2019-12-31 
-st-st-stutter effect, with fixed time
-
-### DOPACOS - 2020-01-05 
-st-st-stutter effect, with variable time // prev:REBEVALLA
-
-### DANACA - 2020-01-06 
-st-st-stutter effect, inspired by tkog feral glitch // prev:DOPACOS
-
-### ISOTIPA - 2020-07-06
-aliasing square-wave fm noise machine
-
-### TODOMA - 2020-07-09
-an experiment in decoupling MIDIdef and SynthDef
+If you need help or want to discuss SuperCollider, live coding, music programming, electronic music (experimental and not) or whatever, feel free to contact me here on [github](https://github.com/gosub), via email [giampaolo.guiducci@gmail.com](mailto:giampaolo.guiducci@gmail.com) or on twitter [@nolente](https://twitter.com/nolente).
