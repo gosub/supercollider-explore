@@ -27,20 +27,36 @@ There are two sources:
   - a low frequency Saw oscillator, with frequencies of 32 Hz on left channel and 33 Hz on the right
   - the return of the feedback signal
 
-these two signal are summed and fed to a BandPass filter
-the output of the BandPass filter is distorted and then fed to a Comb filter
-the output of the comb filter is both the send of the feedback signal and the final output
+these two signal are summed and fed to a BandPass filter the output of the
+BandPass filter is distorted and then fed to a Comb filter the output of the
+comb filter is both the send of the feedback signal and the final output
 
-the frequency of the BandPass filter is modulated by a LFNoise0 ugen. This is a staircase signal
-that changes with a frequency of 4/3 (i.e. every 3/4 of a second). The LFNoise0 signal has
-an amplitude between -4 and +4 (given by the mult parameter) and is the manipulated to obtain
-a range of audible frequencies. The manipulation is the following:
+the frequency of the BandPass filter is modulated by a LFNoise0 ugen. This is a
+staircase signal that changes with a frequency of 4/3 (i.e. every 3/4 of a
+second). The LFNoise0 signal has an amplitude between -4 and +4 (given by the
+mult parameter) and is the manipulated to obtain a range of audible
+frequencies. The manipulation is the following:
 
 - noise = random staircase source, range: -4, +4
-- pow = 2^noise, range: 16, 1/16 (this transforms the initial linear distribution of values to exponential)
+- pow = 2^noise, range: 16, 1/16
 - freq = pow*300, range: 4800, 18.75
 
-TODO: description of the balance act between filter freqs and Qs, feedbacks, distortions and timings
+Note that when using the noise as an exponent, the initial linear distribution
+of values is transformed to an exponential one, mirroring the exponential
+perception of pitch.
+
+There is a subtle balance in place here, some elements reinforce the sound,
+while others dump and soften it. For example, the feedback return (LocalIn) is
+multiplied by 7.5 to amplify it. The Rq parameter of the BandPass filter is
+small, so that only a narrow band of frequencies are allowed to pass, but then
+the signal is immediately distorted, to add harmonics. The Comb filter has a
+long tail (40 seconds) to add a pad under the sound, enhanced by feeding it the
+feedback loop. A non-smooth noise is used to change the BandPass filter
+frequency, creating abrupt changes that introduce clicks and pops. These clicks
+and pops act like percussive elements, but the harsher frequencies are filtered
+by the sequent Comb filter. The choice of delay time for the Comb filter and
+frequencies of the LFNoise0 are related but not exact multiples, creating some
+reinforcement by resonance.
 
 */
 
