@@ -15,7 +15,7 @@
     signal = BPF.ar(signal, filter_freq, rq: 0.1).distort;
     signal = CombN.ar(signal, maxdelaytime: 2, delaytime: 2, decaytime: 40);
     LocalOut.ar(signal);
-    signal.scope;
+    signal;
 }.play
 )
 
