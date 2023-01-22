@@ -60,9 +60,30 @@ reinforcement by resonance.
 
 */
 
-// signal graph
+// signal path graph
 
-/* TODO */
+/*
+
+https://dreampuf.github.io/GraphvizOnline/#digraph%20sc140track01%20%7B%0A%0A%20%20node%20%5Bshape%3Drect%2C%20fontname%3D%22Sans%22%2C%20fontsize%3D10%5D%3B%0A%20%20edge%20%5Bfontsize%3D9%5D%3B%0A%0A%20%20%22Saw.ar%22%3As%20-%3E%20%22%2B%22%3Anw%3B%0A%20%20BPF%20%5Bshape%3Drecord%2Clabel%3D%22%7BBPF.ar%7C%3Cfreq%3E%20freq%7D%22%5D%0A%20%20%22%2B%22%3As%20-%3E%20BPF%3An%3B%0A%20%20%22LFNoise0.kr%22%3As%20-%3E%20BPF%3Afreq%3Aw%20%5Barrowhead%3Ddot%5D%3B%0A%20%20BPF%3As%20-%3E%20%22CombN.ar%22%3An%3B%0A%20%20%22CombN.ar%22%3As%20-%3E%20%22%2B%22%3Ane%20%5Blabel%3D%22feedback%22%5D%3B%0A%20%20%22CombN.ar%22%3As%20-%3E%20out%3An%3B%0A%0A%20%20out%20%5Bshape%3DMsquare%5D%3B%0A%20%20%22%2B%22%20%5Bshape%3Dinvtriangle%5D%3B%0A%7D
+
+digraph sc140track01 {
+
+  node [shape=rect, fontname="Sans", fontsize=10];
+  edge [fontsize=9];
+
+  "Saw.ar":s -> "+":nw;
+  BPF [shape=record,label="{BPF.ar|<freq> freq}"]
+  "+":s -> BPF:n;
+  "LFNoise0.kr":s -> BPF:freq:w [arrowhead=dot];
+  BPF:s -> "CombN.ar":n;
+  "CombN.ar":s -> "+":ne [label="feedback"];
+  "CombN.ar":s -> out:n;
+
+  out [shape=Msquare];
+  "+" [shape=invtriangle];
+}
+
+*/
 
 // interesting modifications
 
