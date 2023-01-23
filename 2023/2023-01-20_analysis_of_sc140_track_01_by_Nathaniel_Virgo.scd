@@ -87,4 +87,15 @@ digraph sc140track01 {
 
 // interesting modifications
 
-/* TODO */
+/*
+
+- substite the Saw ugen with another harmonically rich oscillator, e.g. Pulse
+- change the source starting frequencies, e.g. [320, 67]
+- change the LFNoise0 frequency modulator with a smooth one, e.g. LFNoise1
+- change the frequency of LFNoise0 modulator, e.g. 4/3 -> 5
+- increase or decrease the rq parameter of the BPF, e.g. 0.5 or 0.001
+- change the BP filter to a different filter type, e.g. LPF or HPF
+- reduce the delay and decay times in CombB, e.g. delaytime:0.2, decaytime: 0.4
+
+*/
+
