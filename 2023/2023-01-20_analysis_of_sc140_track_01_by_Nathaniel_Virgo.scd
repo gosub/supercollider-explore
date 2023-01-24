@@ -99,3 +99,18 @@ digraph sc140track01 {
 
 */
 
+// variation
+
+(
+{
+    var signal, feedback, source, filter_freq;
+    source = Pulse.ar([32, 33], 0.2);
+    feedback = LocalIn.ar(2) * 7.5;
+    signal = source + feedback;
+    filter_freq = 2 ** LFNoise0.kr(5, mul: 4) * 300;
+    signal = BPF.ar(signal, filter_freq, rq: 0.5).distort;
+    signal = CombN.ar(signal, maxdelaytime: 0.2, delaytime: 0.2, decaytime: 0.4);
+    LocalOut.ar(signal);
+    signal;
+}.play
+)
