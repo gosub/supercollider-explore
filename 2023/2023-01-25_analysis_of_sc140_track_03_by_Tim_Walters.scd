@@ -11,9 +11,12 @@ play{({|k|({|i|y=SinOsc;y.ar(i*k*k,y.ar(i*k**i/[4,5])*Decay.kr(Dust.kr(1/4**i),y
     var external_function, internal_function;
     16.collect({ |i|
         8.collect({ |j|
-            var frequency, phase;
+            var frequency, phase, phase_env, phase_env_trig, phase_env_decay_time;
             frequency = j*i*i;
-            phase = SinOsc.ar(j*i**j/[4,5]) * Decay.kr(Dust.kr(1/4**j), SinOsc.ar(0.1)+1*i+j, i*999);
+            phase_env_trig = Dust.kr(1/4**j);
+            phase_env_decay_time = SinOsc.ar(0.1)+1*i+j;
+            phase_env = Decay.kr(phase_env_trig, phase_env_decay_time, i*999);
+            phase = SinOsc.ar(j*i**j/[4,5]) * phase_env;
             SinOsc.ar(frequency, phase);
         }).product;
     }).sum;
