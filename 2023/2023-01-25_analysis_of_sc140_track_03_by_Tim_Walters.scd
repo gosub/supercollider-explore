@@ -37,4 +37,3 @@ play{({|k|({|i|y=SinOsc;y.ar(i*k*k,y.ar(i*k**i/[4,5])*Decay.kr(Dust.kr(1/4**i),y
 
 // variation
 
-{|x| x}!7
