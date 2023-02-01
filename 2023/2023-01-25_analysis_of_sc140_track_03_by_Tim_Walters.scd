@@ -33,6 +33,8 @@ Let's start from the base function. The arguments to this functions are i and j,
 
 The inner loop collects a list of 8 outputs of the base function, and multiplies all eight with each other, obtaining a single signal that is the equivalent of ring modulating them all together.
 
+The outer loop repeats this process 16 times, collects these ring modulated signals and mixes them (`.sum`).
+
 
 */
 
