@@ -35,6 +35,8 @@ The inner loop collects a list of 8 outputs of the base function, and multiplies
 
 The outer loop repeats this process 16 times, collects these ring modulated signals and mixes them (`.sum`).
 
+Since the base function returns a stereo signal, in total we have 2*8*16=256 audio sources that goes into the final output. If we add the various modulating ugens, the total ugen count for this patch goes up to 1688u.
+
 
 */
 
