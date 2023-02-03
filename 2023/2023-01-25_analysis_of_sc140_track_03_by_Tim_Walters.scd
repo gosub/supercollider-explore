@@ -37,6 +37,8 @@ The outer loop repeats this process 16 times, collects these ring modulated sign
 
 Since the base function returns a stereo signal, in total we have 2*8*16=256 audio sources that goes into the final output. If we add the various modulating ugens, the total ugen count for this patch goes up to 1688u.
 
+One interesting aspect of the patch is that without phase modulation the result is just silence. You can check it by removing the `phase` parameter from the last SinOsc in the base function. This happens because the index in the  inner loop goes from 0 to 7, so the first oscillator has a frequency of 0 Hz (i.e. a flat signal of constant zero value). The other 7 oscillators (with index from 1 to 7) have a non-zero frequency, but in the end all these sources are multipled together (.product method), so the zero signal would zero-out all the others. The outer loop then would just mix together 16 signals of only silence.
+
 
 */
 
