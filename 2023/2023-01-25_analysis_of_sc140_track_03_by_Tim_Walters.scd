@@ -48,6 +48,11 @@ But when we add phase modulation in the mix, since phase modulation is equivalen
 
 // interesting modifications
 
+/*
+
+- add a constant value to the frequency of the final SinOsc, e.g. +7, +20, +100 or +0.01
+
+*/
 
 // variation
 
