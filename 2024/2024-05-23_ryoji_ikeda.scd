@@ -11,7 +11,7 @@ SynthDef(\click, {
 SynthDef(\hightone, {
 	var snd;
 	snd = SinOsc.ar(10000);
-	snd = snd * EnvGen.ar(Env([0,1,0], [0.001, 0.010, 0.010]), doneAction: Done.freeSelf);
+	snd = snd * EnvGen.ar(Env([0,1,1,0], [0.001, 0.010, 0.010]), doneAction: Done.freeSelf);
 	Out.ar(0, snd!2);
 }).add;
 
