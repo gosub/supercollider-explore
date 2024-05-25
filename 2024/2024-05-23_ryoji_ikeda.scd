@@ -28,6 +28,16 @@ SynthDef(\bass, {
 	Out.ar(0, snd!2);
 }).add;
 
+SynthDef(\envsine, {
+	var snd, noi;
+	snd = SinOsc.ar(1174);
+	snd = snd * EnvGen.ar(Env.linen(0.010, 0.200, 0.500));
+	snd = snd;
+	snd = FreeVerb2.ar(snd, snd, mix: 0.5, room: 0.7, damp: 0.2);
+	DetectSilence.ar(snd, doneAction: Done.freeSelf);
+	Out.ar(0, snd);
+}).add;
+
 )
 
 a = Pbind(\instrument, \click, \dur, 0.1).play;
