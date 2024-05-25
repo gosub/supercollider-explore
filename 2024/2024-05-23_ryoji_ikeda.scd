@@ -51,4 +51,7 @@ b = Pbind(
 )
 b.stop;
 
-z = Synth(\hightone);
+z = Synth(\click);
+y = Synth(\hightone);
+x = Synth(\bass);
+w = Synth(\envsine);
