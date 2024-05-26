@@ -60,6 +60,7 @@ SynthDef(\burst, {
 	Out.ar(0, snd!2);
 }).add;
 
+~xox = {|str| str.collectAs({|l| switch(l.toLower,$x, {1}, $o, {Rest(1)})}, Array)};
 )
 
 a = Pbind(\instrument, \click, \dur, 0.1).play;
@@ -67,8 +68,8 @@ a.stop;
 
 (
 b = Pbind(
-	\dur, Pseq(0.1 * [1,1,1,Rest(1),1,1,Rest(1),Rest(1),1,1,1,Rest(1),Rest(1),1,1,Rest(1)], inf)
 	\instrument, \highshort,
+	\dur, Pseq(0.1 * ~xox.("xxxoxxooxxxooxxo"), inf)
 ).play;
 )
 b.stop;
