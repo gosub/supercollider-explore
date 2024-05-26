@@ -8,7 +8,7 @@ SynthDef(\click, {
 	Out.ar(0, snd);
 }).add;
 
-SynthDef(\hightone, {
+SynthDef(\highshort, {
 	var snd;
 	snd = SinOsc.ar(10000);
 	snd = snd * EnvGen.ar(Env([0,1,1,0], [0.001, 0.010, 0.010]), doneAction: Done.freeSelf);
@@ -45,13 +45,13 @@ a.stop;
 
 (
 b = Pbind(
-	\instrument, \hightone,
 	\dur, Pseq(0.1 * [1,1,1,Rest(1),1,1,Rest(1),Rest(1),1,1,1,Rest(1),Rest(1),1,1,Rest(1)], inf)
+	\instrument, \highshort,
 ).play;
 )
 b.stop;
 
 z = Synth(\click);
-y = Synth(\hightone);
+y = Synth(\highshort);
 x = Synth(\bass);
 w = Synth(\envsine);
