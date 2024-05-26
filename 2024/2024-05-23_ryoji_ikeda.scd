@@ -38,6 +38,28 @@ SynthDef(\envsine, {
 	Out.ar(0, snd);
 }).add;
 
+SynthDef(\highlong, {
+	var snd;
+	snd = SinOsc.ar(12544);
+	snd = snd * EnvGen.ar(Env.linen(0.001, 0.400, 0.150), doneAction: Done.freeSelf);
+	Out.ar(0, snd!2);
+}).add;
+
+SynthDef(\midsine, {
+	var snd;
+	snd = SinOsc.ar(3136);
+	snd = Clip.ar(snd, -0.9, 0.9);
+	snd = snd * EnvGen.ar(Env.linen(0.005, 0.050, 0.010), doneAction: Done.freeSelf);
+	Out.ar(0, snd!2);
+}).add;
+
+SynthDef(\burst, {
+	var snd;
+	snd = WhiteNoise.ar(mul: -7.dbamp);
+	snd = snd * EnvGen.ar(Env.linen(0.001, 0.400, 0.010), doneAction: Done.freeSelf);
+	Out.ar(0, snd!2);
+}).add;
+
 )
 
 a = Pbind(\instrument, \click, \dur, 0.1).play;
@@ -55,3 +77,6 @@ z = Synth(\click);
 y = Synth(\highshort);
 x = Synth(\bass);
 w = Synth(\envsine);
+v = Synth(\highlong);
+u = Synth(\midsine);
+t = Synth(\burst);
