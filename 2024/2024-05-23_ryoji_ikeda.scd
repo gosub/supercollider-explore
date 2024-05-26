@@ -23,8 +23,8 @@ SynthDef(\bass, {
 	snd = HPF.ar(snd, 20);
 	noi = HPF.ar(HPF.ar(LPF.ar(WhiteNoise.ar, 100), 500), 500);
 	noi = noi * EnvGen.ar(Env.linen(0.010, 0.015, 0.005));
+	snd = snd * EnvGen.ar(Env.linen(0.010, 1.100, 0.200), doneAction: Done.freeSelf);
 	snd = snd + noi;
-	snd = snd * EnvGen.ar(Env([0,1,1,0], [0.001, 0.200, 0.010]), doneAction: Done.freeSelf);
 	Out.ar(0, snd!2);
 }).add;
 
