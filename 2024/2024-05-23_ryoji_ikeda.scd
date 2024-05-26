@@ -16,6 +16,7 @@ SynthDef(\highshort, {
 }).add;
 
 SynthDef(\bass, {
+	//TODO: substitute LPF & HPF with OnePole, but we must calculate the coeffs!
 	var snd, noi;
 	snd = SinOsc.ar([49, 98, 196]).sum * 2.0;
 	snd = Clip.ar(snd, -0.9, 0.9);
