@@ -1,8 +1,10 @@
 (
+~coeff = {|freq| exp(-2pi * (freq * SampleDur.ir))};
+
 SynthDef(\click, {
 	var snd;
 	snd = Impulse.ar(0);
-	snd = LPF.ar(snd, freq: Rand(500, 10000));
+	snd = OnePole.ar(snd, ~coeff.(Rand(500, 10000)));
 	DetectSilence.ar(snd, doneAction: Done.freeSelf);
 	snd = Pan2.ar(snd, pos: Rand(-1, 1));
 	Out.ar(0, snd);
@@ -16,13 +18,13 @@ SynthDef(\highshort, {
 }).add;
 
 SynthDef(\bass, {
-	//TODO: substitute LPF & HPF with OnePole, but we must calculate the coeffs!
+	//TODO: substitute HPF with OnePole+OneZero, but we must calculate the coeffs!
 	var snd, noi;
 	snd = SinOsc.ar([49, 98, 196]).sum * 2.0;
 	snd = Clip.ar(snd, -0.9, 0.9);
-	snd = LPF.ar(snd, 50);
+	snd = OnePole.ar(snd, ~coeff.(50));
 	snd = HPF.ar(snd, 20);
-	noi = HPF.ar(HPF.ar(LPF.ar(WhiteNoise.ar, 100), 500), 500);
+	noi = HPF.ar(OnePole.ar(WhiteNoise.ar, ~coeff.(100)), 500); //those were [lop~ 500]
 	noi = noi * EnvGen.ar(Env.linen(0.010, 0.015, 0.005));
 	snd = snd * EnvGen.ar(Env.linen(0.010, 1.100, 0.200), doneAction: Done.freeSelf);
 	snd = snd + noi;
