@@ -66,16 +66,20 @@ SynthDef(\burst, {
 ~xox = {|str| str.collectAs({|l| switch(l.toLower,$x, {1}, $o, {Rest(1)})}, Array)};
 )
 
-a = Pbind(\instrument, \click, \dur, 0.1).play;
-a.stop;
-
 (
-b = Pbind(
-	\instrument, \highshort,
-	\dur, Pseq(0.1 * ~xox.("xxxoxxooxxxooxxo"), inf)
-).play;
+~p1 = "xxxxxxxxxxxxxxxx"; //click
+~p2 = "xxxoxxooxxxooxxo"; //highshort
+
+~tick = 0.08823;
+
+Pdef(\ikeda, Ppar([
+	Pbind(\instrument, \click, \dur, Pseq(~tick * ~xox.(~p1), inf)),
+	Pbind(\instrument, \highshort, \dur, Pseq(~tick * ~xox.(~p2), inf))
+])).play;
 )
-b.stop;
+
+Pdef(\ikeda).stop;
+
 
 z = Synth(\click);
 y = Synth(\highshort);
