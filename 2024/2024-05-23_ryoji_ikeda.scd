@@ -69,12 +69,17 @@ SynthDef(\burst, {
 (
 ~p1 = "xxxxxxxxxxxxxxxx"; //click
 ~p2 = "xxxoxxooxxxooxxo"; //highshort
+~p3 = "xooooooooooooooooooxoooooooooooo"; //bass
+~p4 = "ooooooxooooooooo"; //envsine
 
 ~tick32 = 0.08823;
+~tick16 = ~tick32 * 2;
 
 Pdef(\ikeda, Ppar([
 	Pbind(\instrument, \click,     \dur, Pseq(~tick32 * ~xox.(~p1), inf)),
 	Pbind(\instrument, \highshort, \dur, Pseq(~tick32 * ~xox.(~p2), inf)),
+	Pbind(\instrument, \bass,      \dur, Pseq(~tick16 * ~xox.(~p3), inf)),
+	Pbind(\instrument, \envsine,   \dur, Pseq(~tick16 * ~xox.(~p4), inf)),
 ])).play;
 )
 
