@@ -70,11 +70,11 @@ SynthDef(\burst, {
 ~p1 = "xxxxxxxxxxxxxxxx"; //click
 ~p2 = "xxxoxxooxxxooxxo"; //highshort
 
-~tick = 0.08823;
+~tick32 = 0.08823;
 
 Pdef(\ikeda, Ppar([
-	Pbind(\instrument, \click, \dur, Pseq(~tick * ~xox.(~p1), inf)),
-	Pbind(\instrument, \highshort, \dur, Pseq(~tick * ~xox.(~p2), inf))
+	Pbind(\instrument, \click,     \dur, Pseq(~tick32 * ~xox.(~p1), inf)),
+	Pbind(\instrument, \highshort, \dur, Pseq(~tick32 * ~xox.(~p2), inf)),
 ])).play;
 )
 
