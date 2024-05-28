@@ -24,9 +24,9 @@ SynthDef(\bass, {
 	snd = Clip.ar(snd, -0.9, 0.9);
 	snd = OnePole.ar(snd, ~coeff.(50));
 	snd = HPF.ar(snd, 20);
-	noi = noi * EnvGen.ar(Env.linen(0.010, 0.015, 0.005));
-	snd = snd * EnvGen.ar(Env.linen(0.010, 1.100, 0.200), doneAction: Done.freeSelf);
 	noi = HPF.ar(OnePole.ar(WhiteNoise.ar, ~coeff.(100)), 500); // HPF = [hip~ 500]*2
+	noi = noi * EnvGen.ar(Env.linen(0.010, 0.005, 0.005));
+	snd = snd * EnvGen.ar(Env.linen(0.010, 1.090, 0.200), doneAction: Done.freeSelf);
 	snd = snd + noi;
 	Out.ar(0, snd!2);
 }).add;
