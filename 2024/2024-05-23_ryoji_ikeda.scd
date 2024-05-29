@@ -71,7 +71,7 @@ SynthDef(\burst, {
 ~p1 = "xxxxxxxxxxxxxxxx"; //click
 ~p2 = "xxxoxxooxxxooxxo"; //highshort
 ~p3 = "xooooooooooooooooooxoooooooooooo"; //bass
-~p4 = "ooooooxooooooooo"; //envsine
+~p4 = "ooooooxooooooooooooooooooooooooo"; //envsine
 
 ~tick32 = 0.08823;
 ~tick16 = ~tick32 * 2;
