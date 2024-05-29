@@ -49,10 +49,11 @@ SynthDef(\highlong, {
 }).add;
 
 SynthDef(\midsine, {
-	var snd;
+	var snd, env;
 	snd = SinOsc.ar(3136);
 	snd = Clip.ar(snd, -0.9, 0.9);
-	snd = snd * EnvGen.ar(Env.linen(0.005, 0.050, 0.010), doneAction: Done.freeSelf);
+	env=Env.linen(0.005, 0.050, 0.010);
+	snd = snd * EnvGen.ar(env, doneAction: Done.freeSelf);
 	Out.ar(0, snd!2);
 }).add;
 
