@@ -101,7 +101,7 @@ Pdef(\ikeda, Ppar([
 	Pbind(\instrument, \bass,      \dur, Pseq(~tick16 * ~xox.(~p3), inf)),
 	Pbind(\instrument, \envsine,   \dur, Pseq(~tick16 * ~xox.(~p4), inf)),
 	Pbind(\instrument, \highlong,  \dur, Pseq(~tick16 * ~xox.(~p5), inf)),
-	Pbind(\instrument, \midsine,  \dur, Pseq(~tick32 * ~xox.(~p6), inf)),
+	Pbind(\instrument, \midsine,   \dur, Pseq(~tick32 * ~xox.(~p6), inf)),
 ])).play;
 )
 
