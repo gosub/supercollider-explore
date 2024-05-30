@@ -84,6 +84,9 @@ SynthDef(\burst, { |out, amp=0.1|
 (
 // sequencing
 
+~tick32 = 0.08823;
+~tick16 = ~tick32 * 2;
+
 ~p1 = "xxxxxxxxxxxxxxxx"; //click
 ~p2 = "xxxoxxooxxxooxxo"; //highshort
 ~p3 = "xooooooooooooooooooxoooooooooooo"; //bass
@@ -93,9 +96,6 @@ SynthDef(\burst, { |out, amp=0.1|
    ++ "xxoooooooooooooooooooooooooooooo"; //midsine
 
 ~p7 = Array.newClear(31).fill(Rest(~tick16)).add(~tick16).scramble; //burst
-
-~tick32 = 0.08823;
-~tick16 = ~tick32 * 2;
 
 Pdef(\ikeda, Ppar([
 	Pbind(\instrument, \click,     \dur, Pseq(~tick32 * ~xox.(~p1), inf)),
