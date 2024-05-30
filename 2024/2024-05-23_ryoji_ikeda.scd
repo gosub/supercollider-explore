@@ -1,4 +1,11 @@
+// Sound Simulator's "Ryoji Ikeda Pure Data Tutorial" ported to SC
+// source: https://www.youtube.com/watch?v=CLddxGIlVPU
+// I only did the porting, kudos to Sound Simulator for the original idea
+// and Pure Data implementation!
+
 (
+// SynthDefs & helper functions
+
 ~coeff = {|freq| exp(-2pi * (freq * SampleDur.ir))};
 
 SynthDef(\click, {
@@ -68,6 +75,8 @@ SynthDef(\burst, {
 )
 
 (
+// sequencing
+
 ~p1 = "xxxxxxxxxxxxxxxx"; //click
 ~p2 = "xxxoxxooxxxooxxo"; //highshort
 ~p3 = "xooooooooooooooooooxoooooooooooo"; //bass
@@ -92,6 +101,7 @@ Pdef(\ikeda, Ppar([
 Pdef(\ikeda).stop;
 
 
+// test single synths
 z = Synth(\click);
 y = Synth(\highshort);
 x = Synth(\bass);
