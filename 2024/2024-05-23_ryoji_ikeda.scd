@@ -8,23 +8,25 @@
 
 ~coeff = {|freq| exp(-2pi * (freq * SampleDur.ir))};
 
-SynthDef(\click, {
+SynthDef(\click, { |out, amp=0.1|
 	var snd;
 	snd = Impulse.ar(0);
 	snd = OnePole.ar(snd, ~coeff.(Rand(500, 10000)));
 	DetectSilence.ar(snd, doneAction: Done.freeSelf);
+	snd = snd * amp;
 	snd = Pan2.ar(snd, pos: Rand(-1, 1));
-	Out.ar(0, snd);
+	Out.ar(out, snd);
 }).add;
 
-SynthDef(\highshort, {
+SynthDef(\highshort, { |out, amp=0.1|
 	var snd;
 	snd = SinOsc.ar(10000);
 	snd = snd * EnvGen.ar(Env([0,1,1,0], [0.001, 0.010, 0.010]), doneAction: Done.freeSelf);
+	snd = snd * amp;
 	Out.ar(0, snd!2);
 }).add;
 
-SynthDef(\bass, {
+SynthDef(\bass, { |out, amp=0.1|
 	//TODO: substitute HPF with OnePole+OneZero, but we must calculate the coeffs!
 	var snd, noi;
 	snd = SinOsc.ar([49, 98, 196]).sum * 2.0;
@@ -35,40 +37,45 @@ SynthDef(\bass, {
 	noi = noi * EnvGen.ar(Env.linen(0.010, 0.005, 0.005));
 	snd = snd * EnvGen.ar(Env.linen(0.010, 1.090, 0.200), doneAction: Done.freeSelf);
 	snd = snd + noi;
-	Out.ar(0, snd!2);
+	snd = snd * amp;
+	Out.ar(out, snd!2);
 }).add;
 
-SynthDef(\envsine, {
+SynthDef(\envsine, { |out, amp=0.1|
 	var snd, noi;
 	snd = SinOsc.ar(1174);
 	snd = snd * EnvGen.ar(Env.linen(0.010, 0.200, 0.500));
 	snd = snd;
 	snd = FreeVerb2.ar(snd, snd, mix: 0.5, room: 0.7, damp: 0.2);
+	snd = snd * amp;
 	DetectSilence.ar(snd, doneAction: Done.freeSelf);
-	Out.ar(0, snd);
+	Out.ar(out, snd);
 }).add;
 
-SynthDef(\highlong, {
+SynthDef(\highlong, { |out, amp=0.1|
 	var snd;
 	snd = SinOsc.ar(12544);
 	snd = snd * EnvGen.ar(Env.linen(0.001, 0.400, 0.150), doneAction: Done.freeSelf);
-	Out.ar(0, snd!2);
+	snd = snd * amp;
+	Out.ar(out, snd!2);
 }).add;
 
-SynthDef(\midsine, {
+SynthDef(\midsine, { |out, amp=0.1|
 	var snd, env;
 	snd = SinOsc.ar(3136);
 	snd = Clip.ar(snd, -0.9, 0.9);
 	env=Env.linen(0.005, 0.050, 0.010);
 	snd = snd * EnvGen.ar(env, doneAction: Done.freeSelf);
-	Out.ar(0, snd!2);
+	snd = snd * amp;
+	Out.ar(out, snd!2);
 }).add;
 
-SynthDef(\burst, {
+SynthDef(\burst, { |out, amp=0.1|
 	var snd;
 	snd = WhiteNoise.ar(mul: -7.dbamp);
 	snd = snd * EnvGen.ar(Env.linen(0.001, 0.400, 0.010), doneAction: Done.freeSelf);
-	Out.ar(0, snd!2);
+	snd = snd * amp;
+	Out.ar(out, snd!2);
 }).add;
 
 ~xox = {|str| str.collectAs({|l| switch(l.toLower,$x, {1}, $o, {Rest(1)})}, Array)};
