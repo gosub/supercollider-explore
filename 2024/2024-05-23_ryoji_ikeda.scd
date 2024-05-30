@@ -92,6 +92,8 @@ SynthDef(\burst, { |out, amp=0.1|
 ~p6 = "xooooooooooooooooooooooooooooooo"
    ++ "xxoooooooooooooooooooooooooooooo"; //midsine
 
+~p7 = Array.newClear(31).fill(Rest(~tick16)).add(~tick16).scramble; //burst
+
 ~tick32 = 0.08823;
 ~tick16 = ~tick32 * 2;
 
@@ -102,6 +104,7 @@ Pdef(\ikeda, Ppar([
 	Pbind(\instrument, \envsine,   \dur, Pseq(~tick16 * ~xox.(~p4), inf)),
 	Pbind(\instrument, \highlong,  \dur, Pseq(~tick16 * ~xox.(~p5), inf)),
 	Pbind(\instrument, \midsine,   \dur, Pseq(~tick32 * ~xox.(~p6), inf)),
+	Pbind(\instrument, \burst,     \dur, Pseq(~p7, inf)),
 ])).play;
 )
 
