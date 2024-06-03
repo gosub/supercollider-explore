@@ -1,3 +1,4 @@
+// TODO: do not re-download the file if already present
 (
 ~ytdl = {|vid, filename|
 	["yt-dlp", "--extract-audio", "--audio-format", "wav",
