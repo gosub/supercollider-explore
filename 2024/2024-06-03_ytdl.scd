@@ -1,8 +1,16 @@
-// TODO: do not re-download the file if already present
 (
-~ytdl = {|vid, filename|
-	["yt-dlp", "--extract-audio", "--audio-format", "wav",
-		"--output", filename, vid].unixCmd;
+~ytdl = {|vid, filename, debug=false|
+	var output;
+	if (File.exists(filename)) {
+		if (debug) {(filename + "already present").postln};
+		filename;
+	} {
+		if (debug) {("downloading" + vid + "into" + filename).postln};
+		output = ["yt-dlp", "--extract-audio", "--audio-format", "wav",
+			"--output", filename, vid].unixCmdGetStdOut;
+		if (debug) {output.postln};
+		filename;
+	};
 };
 )
 
