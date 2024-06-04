@@ -33,3 +33,4 @@ Buffer.read(s, ~file, action:
 	});
 )
 
+File.delete(~file);
