@@ -14,20 +14,22 @@
 };
 )
 
-// example download
+// example usage
 (
 ~rr = "dQw4w9WgXcQ";
 ~file = "/tmp/rr.wav";
 
 ~ytdl.(~rr, ~file);
-)
+("download complete:" + ~file).postln;
 
-// wait for file to download
-// then run the following
-(
-b = Buffer.read(s, ~file);
-{
-	PlayBuf.ar(2,b);
-}.play;
+Buffer.read(s, ~file, action:
+	{ |bufnum|
+		{
+			var rate = 2;
+			var frames = bufnum.numFrames/bufnum.numChannels;
+			var lf = LFNoise0.ar(rate).linlin(-1, 1, 0, frames);
+			PlayBuf.ar(2, b, BufRateScale.ir(b), Impulse.kr(rate), startPos: lf );
+		}.play;
+	});
 )
 
