@@ -19,6 +19,7 @@
 ~rr = "dQw4w9WgXcQ";
 ~file = "/tmp/rr.wav";
 
+("downloading:" + ~file).postln;
 ~ytdl.(~rr, ~file);
 ("download complete:" + ~file).postln;
 
