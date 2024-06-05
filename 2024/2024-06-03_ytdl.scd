@@ -23,15 +23,7 @@
 ~ytdl.(~rr, ~file);
 ("download complete:" + ~file).postln;
 
-Buffer.read(s, ~file, action:
-	{ |bufnum|
-		{
-			var rate = 2;
-			var frames = bufnum.numFrames/bufnum.numChannels;
-			var lf = LFNoise0.ar(rate).linlin(-1, 1, 0, frames);
-			PlayBuf.ar(2, b, BufRateScale.ir(b), Impulse.kr(rate), startPos: lf );
-		}.play;
-	});
+~buffer = Buffer.read(s, ~file);
 )
 
 File.delete(~file);
