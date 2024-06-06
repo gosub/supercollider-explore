@@ -1,3 +1,11 @@
+// Helper function to extract audio from a youtube video
+// and save it to a file
+//
+// Note:
+// - Linux/OSX/Unix only (uses .unixCmd)
+// - Needs yt-dlp to be installed
+// - The download procedure is synchronous
+
 (
 ~ytdl = {|vid, filename, debug=false|
 	var output;
