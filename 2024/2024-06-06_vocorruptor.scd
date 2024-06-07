@@ -22,4 +22,4 @@ SynthDef(\vocorruptor, {
 }).add;
 )
 
-Synth(\vocorruptor);
+a = Synth(\vocorruptor, [\bufnum, b, \bufamp, 2, \caramp, 5]);
