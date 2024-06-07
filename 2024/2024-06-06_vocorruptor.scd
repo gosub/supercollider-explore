@@ -23,3 +23,4 @@ SynthDef(\vocorruptor, {
 )
 
 a = Synth(\vocorruptor, [\bufnum, b, \bufamp, 2, \caramp, 5]);
+a.set(\freq, [50,54,58,62,66,70].choose);
