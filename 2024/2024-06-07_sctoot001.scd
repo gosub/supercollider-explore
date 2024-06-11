@@ -18,7 +18,6 @@ SynthDef(\sctoot001, {
 }).add;
 )
 
-Synth(\sctoot001);
 // as a SyntDef with parameters
 (
 SynthDef(\sctoot001, {
@@ -30,6 +29,7 @@ SynthDef(\sctoot001, {
 }).add;
 )
 
+a = Synth(\sctoot001, [\freq, 333, \gatefreq, 5, \delay, 30.midicps.reciprocal, \res, 0.7]);
 
 
 // version 2
