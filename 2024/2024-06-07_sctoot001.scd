@@ -19,6 +19,17 @@ SynthDef(\sctoot001, {
 )
 
 Synth(\sctoot001);
+// as a SyntDef with parameters
+(
+SynthDef(\sctoot001, {
+	| out |
+	var snd;
+	snd = LFNoise0.ar(\freq.kr(333)) * LFPulse.ar(\gatefreq.kr(5));
+	snd = Streson.ar(snd, delayTime: \delay.kr(70.reciprocal), res: \res.kr(0.9));
+	Out.ar(out, snd!2);
+}).add;
+)
+
 
 
 // version 2
