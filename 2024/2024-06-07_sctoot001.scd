@@ -46,8 +46,8 @@ a.set(\delay, (30,32..40).choose.midicps.reciprocal,
 SynthDef(\sctoot001c, {
 	| out |
 	var snd, ff, gf, amf, note = \note.kr(30), f;
-	ff = LFNoise1.kr(\freqfreq.kr(1/4)).linlin(0,1,200,500);
-	amf = LFNoise1.kr(\amfreq.kr(1/2)).linlin(0,1,5,15);
+	ff = LFNoise0.kr(\freqfreq.kr(1/4)).linlin(0,1,200,500);
+	amf = LFNoise0.kr(\amfreq.kr(1/2)).linlin(0,1,5,15);
 	gf =  LFNoise0.kr(\gatefreq.kr(1/3)).linlin(0,1,3,10);
 	snd = LFNoise0.ar(ff) * LFSaw.ar(amf) * LFPulse.ar(gf);
 	f = note.midicps;
