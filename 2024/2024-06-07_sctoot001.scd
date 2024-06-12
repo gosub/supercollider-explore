@@ -5,9 +5,9 @@
 // - base noise freq = 333
 // - gate pulse freq = 5
 // - Streson delay time = 1/70
-// - Streason resonance = 0.9
+// - Streson resonance = 0.9
 
-// as a SyntDef
+// as a SynthDef
 (
 SynthDef(\sctoot001, {
 	| out |
@@ -18,7 +18,7 @@ SynthDef(\sctoot001, {
 }).add;
 )
 
-// as a SyntDef with parameters
+// as a SynthDef with parameters
 (
 SynthDef(\sctoot001, {
 	| out |
