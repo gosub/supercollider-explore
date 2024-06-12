@@ -58,5 +58,5 @@ SynthDef(\sctoot001c, {
 )
 
 a = Synth(\sctoot001c);
-a.set(\note, 30);
+a.set(\note, 31);
 a.set(\res, 0.85);
