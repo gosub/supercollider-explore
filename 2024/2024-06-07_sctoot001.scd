@@ -20,7 +20,7 @@ SynthDef(\sctoot001, {
 
 // as a SynthDef with parameters
 (
-SynthDef(\sctoot001, {
+SynthDef(\sctoot001b, {
 	| out |
 	var snd;
 	snd = LFNoise0.ar(\freq.kr(333)) * LFPulse.ar(\gatefreq.kr(5));
@@ -29,7 +29,7 @@ SynthDef(\sctoot001, {
 }).add;
 )
 
-a = Synth(\sctoot001, [\freq, 333, \gatefreq, 5, \delay, 30.midicps.reciprocal, \res, 0.7]);
+a = Synth(\sctoot001b, [\freq, 333, \gatefreq, 5, \delay, 30.midicps.reciprocal, \res, 0.7]);
 
 (
 a.set(\delay, (30,32..40).choose.midicps.reciprocal,
