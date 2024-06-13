@@ -62,3 +62,7 @@ SynthDef(\sctoot001c, {
 a = Synth(\sctoot001c);
 a.set(\note, 31);
 a.set(\res, 0.85);
+
+// compressed version 2
+
+{n=LFNoise0;Streson.ar(n.ar(n.kr(1).linexp(0,1,100,800))*LFPulse.ar(n.kr(1/4).linlin(0,1,1,10)),0.02162,0.85,1.5).tanh!2}.play
