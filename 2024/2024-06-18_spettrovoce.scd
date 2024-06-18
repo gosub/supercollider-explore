@@ -15,3 +15,5 @@ SynthDef(\spettrovoce, {
 }).add;
 )
 
+a = Synth(\spettrovoce);
+a.free;
