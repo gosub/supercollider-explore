@@ -10,7 +10,8 @@ SynthDef(\spettrovoce, {
 	spectrum = [230, 320, 560, 830, 1200, 1700, 2300, 3200, 4500, 5400];
 	car = Pulse.ar(\freq.kr(440));
 	lfo = SinOsc.ar(\lfofreq.kr(1/5)).range(1/4, 4);
-	spectrum = spectrum * lfo;
+	spectrum = spectrum * Gate.ar(lfo, \pass.kr(1));
+
 	ffb = [RLPF.ar(car, spectrum[0], rq: rq)] ++
 	BPF.ar(car, spectrum[1..8], rq: rq) ++
 	[RHPF.ar(car, spectrum[9], rq: rq)];
@@ -20,4 +21,6 @@ SynthDef(\spettrovoce, {
 
 a = Synth(\spettrovoce);
 a.set(\rq, 1/10);
+a.set(\pass, 0);
+a.set(\pass, 1);
 a.free;
