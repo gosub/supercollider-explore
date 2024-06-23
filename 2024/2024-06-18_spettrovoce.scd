@@ -19,7 +19,9 @@ SynthDef(\spettrovoce, {
 }).add;
 )
 
-a = Synth(\spettrovoce);
+a = Synth(\spettrovoce, [\freq, 42.midicps]);
+a.set(\lfofreq, 2.reciprocal);
+a.set(\freq, [30,32,35,42].choose.midicps);
 a.set(\rq, 1/10);
 a.set(\pass, 0);
 a.set(\pass, 1);
