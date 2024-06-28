@@ -27,6 +27,9 @@ p = Pbind(
 q.add(p);
 )
 
+// remove and stop a bind from the list
+q=q.scramble; q.pop.stop; q;
+
 (
 x = {
     s = MdaPiano.ar(
