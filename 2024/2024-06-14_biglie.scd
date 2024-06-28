@@ -16,6 +16,17 @@ Synth(\piano);
 // create a new list of pbinds
 q = List.new;
 
+// add a pbind to the list and play it
+(
+p = Pbind(
+	\instrument, \piano,
+	\scale, Scale.minor,
+	\degree, (-12..12).choose,
+	\dur, ((1..10)*0.25).choose,
+).play;
+q.add(p);
+)
+
 (
 x = {
     s = MdaPiano.ar(
