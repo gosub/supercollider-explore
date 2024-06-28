@@ -10,6 +10,9 @@ SynthDef("piano", {
 	Out.ar(\out.kr(0), sig);
 }).add;
 )
+
+Synth(\piano);
+
 (
 x = {
     s = MdaPiano.ar(
