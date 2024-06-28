@@ -1,4 +1,16 @@
 (
+SynthDef("piano", {
+	var sig;
+	sig = MdaPiano.ar(\freq.kr(440),
+		stereo: 0.5,
+		gate: \gate.kr(1),
+		vel: \vel.kr(100),
+		mul: \amp.kr(0.5));
+	DetectSilence.ar(sig, doneAction: Done.freeSelf);
+	Out.ar(\out.kr(0), sig);
+}).add;
+)
+(
 x = {
     s = MdaPiano.ar(
         (30,32..60).scramble.keep(5).midicps,
