@@ -13,6 +13,9 @@ SynthDef("piano", {
 
 Synth(\piano);
 
+// create a new list of pbinds
+q = List.new;
+
 (
 x = {
     s = MdaPiano.ar(
