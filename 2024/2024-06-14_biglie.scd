@@ -14,6 +14,9 @@ SynthDef(\dist_del_verb, {
 }).add;
 )
 
+// instantiate the effect to the end of the chain
+Synth.tail(~chain, \dist_del_verb);
+
 (
 SynthDef("piano", {
 	var sig;
