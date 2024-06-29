@@ -3,6 +3,18 @@
 ~chain = Group.tail(s);
 
 (
+SynthDef(\dist_del_verb, {
+	|outbuf, inbuf|
+	var sig;
+	sig = In.ar(inbuf, 2);
+	sig = (sig * 10).tanh;
+	sig = CombL.ar(sig);
+	sig = FreeVerb.ar(sig.tanh, 0.8);
+	Out.ar(outbuf, sig);
+}).add;
+)
+
+(
 SynthDef("piano", {
 	var sig;
 	sig = MdaPiano.ar(\freq.kr(440),
