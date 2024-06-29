@@ -32,6 +32,8 @@ SynthDef("piano", {
 
 Synth(\piano);
 
+// start a pbind that stops after a random number of notes
+// tip: launch a cluster of them together
 (
 p = Pbind(
 	\instrument, [\piano, \default].choose,
