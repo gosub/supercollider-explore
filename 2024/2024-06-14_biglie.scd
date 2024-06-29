@@ -32,10 +32,6 @@ SynthDef("piano", {
 
 Synth(\piano);
 
-// create a new list of pbinds
-q = List.new;
-
-// add a pbind to the list and play it
 (
 p = Pbind(
 	\instrument, \piano,
@@ -43,15 +39,7 @@ p = Pbind(
 	\degree, (-12..12).choose,
 	\dur, ((1..10)*0.25).choose,
 ).play;
-q.add(p);
 )
-
-// remove and stop a bind from the list
-q=q.scramble; q.pop.stop; q;
-
-// stop all the pbinds
-q do: _.stop; q.clear;
-
 (
 x = {
     s = MdaPiano.ar(
