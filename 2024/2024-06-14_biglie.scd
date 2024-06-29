@@ -34,11 +34,13 @@ Synth(\piano);
 
 (
 p = Pbind(
-	\instrument, \piano,
+	\instrument, [\piano, \default].choose,
 	\scale, Scale.minor,
 	\degree, (-12..12).choose,
-	\dur, ((1..10)*0.25).choose,
-).play;
+	\vel, (80..111).choose,
+	\dur, [1/4, 1/3, 1/2, 1, 3/2, 2].choose.postln,
+	\dummy, Pseq([1], [1,2,4,8,16,32,64].choose.postln),
+).play(quant: 1/2);
 )
 (
 x = {
