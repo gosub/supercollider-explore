@@ -1,3 +1,7 @@
+// create a group to add effect to the end of
+// the signal chain
+~chain = Group.tail(s);
+
 (
 SynthDef("piano", {
 	var sig;
