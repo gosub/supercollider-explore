@@ -51,9 +51,9 @@ SynthDef(\audrey2, {
 	sigL = (sigL * 1.5).tanh;
 	sigR = (sigR * 1.5).tanh;
 
-	// feedback loop filters
-	sigL = HPF.ar(LPF.ar(sigL, kLpf), kHpf);
-	sigR = HPF.ar(LPF.ar(sigR, kLpf), kHpf);
+	// feedback loop filters + DC blocker
+	sigL = LeakDC.ar(HPF.ar(LPF.ar(sigL, kLpf), kHpf));
+	sigR = LeakDC.ar(HPF.ar(LPF.ar(sigR, kLpf), kHpf));
 
 	// reverb (inside the feedback loop, as in original)
 	#verbL, verbR = FreeVerb2.ar(sigL, sigR,
