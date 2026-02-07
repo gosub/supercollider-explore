@@ -43,9 +43,9 @@ SynthDef(\audrey2, {
 	sigL = WhiteNoise.ar(-90.dbamp) + (fbRetL * kFbAmp);
 	sigR = WhiteNoise.ar(-90.dbamp) + (fbRetR * kFbAmp);
 
-	// karplus-strong resonator (tuned comb filter)
-	sigL = CombL.ar(sigL, 0.2, kFreq.reciprocal, 2);
-	sigR = CombL.ar(sigR, 0.2, kFreq.reciprocal, 2);
+	// karplus-strong resonator (tuned comb filter + brightness damping)
+	sigL = OnePole.ar(CombL.ar(sigL, 0.2, kFreq.reciprocal, 2), 0.98);
+	sigR = OnePole.ar(CombL.ar(sigR, 0.2, kFreq.reciprocal, 2), 0.98);
 
 	// overdrive (soft clipping)
 	sigL = (sigL * 1.5).tanh;
