@@ -96,35 +96,46 @@ w = Window.new("Audrey II", Rect(200, 200, 460, 480)).layout_(
 		StaticText().string_("Audrey II -- feedback drone synthesizer").align_(\center),
 		HLayout(
 			VLayout(StaticText().string_("Freq"),
-				Slider().action_({|x| a.set(\freq, [16,72].asSpec.map(x.value))})),
+				Slider().value_([16,72].asSpec.unmap(48))
+				.action_({|x| a.set(\freq, [16,72].asSpec.map(x.value))})),
 			VLayout(StaticText().string_("Fb Gain"),
-				Slider().action_({|x| a.set(\fbGain, [-60,12].asSpec.map(x.value))})),
+				Slider().value_([-60,12].asSpec.unmap(-20))
+				.action_({|x| a.set(\fbGain, [-60,12].asSpec.map(x.value))})),
 			VLayout(StaticText().string_("Body"),
-				Slider().action_({|x| a.set(\body, [0.001,0.1,\exp].asSpec.map(x.value))})),
+				Slider().value_([0.001,0.1,\exp].asSpec.unmap(0.01))
+				.action_({|x| a.set(\body, [0.001,0.1,\exp].asSpec.map(x.value))})),
 		),
 		HLayout(
 			VLayout(StaticText().string_("LPF"),
-				Slider().action_({|x| a.set(\lpf, [100,18000,\exp].asSpec.map(x.value))})),
+				Slider().value_([100,18000,\exp].asSpec.unmap(12000))
+				.action_({|x| a.set(\lpf, [100,18000,\exp].asSpec.map(x.value))})),
 			VLayout(StaticText().string_("HPF"),
-				Slider().action_({|x| a.set(\hpf, [10,4000,\exp].asSpec.map(x.value))})),
+				Slider().value_([10,4000,\exp].asSpec.unmap(60))
+				.action_({|x| a.set(\hpf, [10,4000,\exp].asSpec.map(x.value))})),
 		),
 		HLayout(
 			VLayout(StaticText().string_("Verb Mix"),
-				Slider().action_({|x| a.set(\verbMix, x.value)})),
+				Slider().value_(0.3)
+				.action_({|x| a.set(\verbMix, x.value)})),
 			VLayout(StaticText().string_("Verb Decay"),
-				Slider().action_({|x| a.set(\verbDecay, [0.2,1.0].asSpec.map(x.value))})),
+				Slider().value_([0.2,1.0].asSpec.unmap(0.5))
+				.action_({|x| a.set(\verbDecay, [0.2,1.0].asSpec.map(x.value))})),
 		),
 		HLayout(
 			VLayout(StaticText().string_("Echo Send"),
-				Slider().action_({|x| a.set(\echoSend, [0.001,1.0,\exp].asSpec.map(x.value))})),
+				Slider().value_([0.001,1.0,\exp].asSpec.unmap(0.001))
+				.action_({|x| a.set(\echoSend, [0.001,1.0,\exp].asSpec.map(x.value))})),
 			VLayout(StaticText().string_("Echo Time"),
-				Slider().action_({|x| a.set(\echoTime, [0.05,5.0,\exp].asSpec.map(x.value))})),
+				Slider().value_([0.05,5.0,\exp].asSpec.unmap(0.3))
+				.action_({|x| a.set(\echoTime, [0.05,5.0,\exp].asSpec.map(x.value))})),
 			VLayout(StaticText().string_("Echo Fb"),
-				Slider().action_({|x| a.set(\echoFb, [0.0,1.5].asSpec.map(x.value))})),
+				Slider().value_([0.0,1.5].asSpec.unmap(0.5))
+				.action_({|x| a.set(\echoFb, [0.0,1.5].asSpec.map(x.value))})),
 		),
 		HLayout(
 			VLayout(StaticText().string_("Volume"),
-				Slider().action_({|x| a.set(\vol, [0.001,1.0,\exp].asSpec.map(x.value))})),
+				Slider().value_([0.001,1.0,\exp].asSpec.unmap(0.3))
+				.action_({|x| a.set(\vol, [0.001,1.0,\exp].asSpec.map(x.value))})),
 		),
 	)
 ).front;
