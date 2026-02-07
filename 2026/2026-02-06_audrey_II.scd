@@ -88,7 +88,9 @@ SynthDef(\audrey2, {
 		verbR + echoOutR
 	] * 0.5 * Lag.kr(vol, 0.05), 0.7));
 }).add;
+)
 
+(
 a = Synth(\audrey2);
 
 w = Window.new("Audrey II", Rect(200, 200, 460, 480)).layout_(
